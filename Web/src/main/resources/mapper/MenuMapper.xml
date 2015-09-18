@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alvin.menu.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.alvin.menu.model.Menu" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="PID" property="pid" jdbcType="DECIMAL" />
+    <result column="LFT" property="lft" jdbcType="DECIMAL" />
+    <result column="RGT" property="rgt" jdbcType="DECIMAL" />
+    <result column="SORT_VALUE" property="sortValue" jdbcType="DECIMAL" />
+    <result column="SHOW_ICON" property="showIcon" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CREATOR" property="creator" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
+    <result column="MODIFIED_TIME" property="modifiedTime" jdbcType="TIMESTAMP" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="DISPLAY" property="display" jdbcType="DECIMAL" />
+    <result column="RESOURCES" property="resources" jdbcType="OTHER" />
+    <result column="MENU_LEVEL" property="menuLevel" jdbcType="DECIMAL" />
+    <result column="MENU_LEVEL_1" property="menuLevel1" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    ID, NAME, LINK_URL, PID, LFT, RGT, SORT_VALUE, SHOW_ICON, DESCRIPTION, CREATOR, CREATE_TIME, 
+    MODIFIER, MODIFIED_TIME, CODE, DISPLAY, RESOURCES, MENU_LEVEL, MENU_LEVEL_1
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+        select
+        <include refid="Base_Column_List" />
+        from HO_MENU
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+
+    <select id="queryMenuInfoList" resultMap="BaseResultMap" parameterType="com.alvin.menu.model.Menu" >
+        select
+        <include refid="Base_Column_List" />
+        from HO_MENU
+    </select>
+
+    <select id="queryMenuInfoListForPid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List" />
+        from HO_MENU
+        where PID = #{pid,jdbcType=DECIMAL}
+    </select>
+
+      <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+        delete from HO_MENU
+        where ID = #{id,jdbcType=DECIMAL}
+      </delete>
+
+  <insert id="insert" parameterType="com.alvin.menu.model.Menu" >
+    insert into HO_MENU (ID, NAME, LINK_URL, 
+      PID, LFT, RGT, SORT_VALUE, 
+      SHOW_ICON, DESCRIPTION, CREATOR, 
+      CREATE_TIME, MODIFIER, MODIFIED_TIME, 
+      CODE, DISPLAY, RESOURCES, 
+      MENU_LEVEL, MENU_LEVEL_1)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=DECIMAL}, #{lft,jdbcType=DECIMAL}, #{rgt,jdbcType=DECIMAL}, #{sortValue,jdbcType=DECIMAL}, 
+      #{showIcon,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=DECIMAL}, #{modifiedTime,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{display,jdbcType=DECIMAL}, #{resources,jdbcType=OTHER}, 
+      #{menuLevel,jdbcType=DECIMAL}, #{menuLevel1,jdbcType=DECIMAL})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.alvin.menu.model.Menu" >
+    insert into HO_MENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="linkUrl != null" >
+        LINK_URL,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="lft != null" >
+        LFT,
+      </if>
+      <if test="rgt != null" >
+        RGT,
+      </if>
+      <if test="sortValue != null" >
+        SORT_VALUE,
+      </if>
+      <if test="showIcon != null" >
+        SHOW_ICON,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="modifiedTime != null" >
+        MODIFIED_TIME,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="display != null" >
+        DISPLAY,
+      </if>
+      <if test="resources != null" >
+        RESOURCES,
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL,
+      </if>
+      <if test="menuLevel1 != null" >
+        MENU_LEVEL_1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=DECIMAL},
+      </if>
+      <if test="lft != null" >
+        #{lft,jdbcType=DECIMAL},
+      </if>
+      <if test="rgt != null" >
+        #{rgt,jdbcType=DECIMAL},
+      </if>
+      <if test="sortValue != null" >
+        #{sortValue,jdbcType=DECIMAL},
+      </if>
+      <if test="showIcon != null" >
+        #{showIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifiedTime != null" >
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=DECIMAL},
+      </if>
+      <if test="resources != null" >
+        #{resources,jdbcType=OTHER},
+      </if>
+      <if test="menuLevel != null" >
+        #{menuLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="menuLevel1 != null" >
+        #{menuLevel1,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.alvin.menu.model.Menu" >
+    update HO_MENU
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=DECIMAL},
+      </if>
+      <if test="lft != null" >
+        LFT = #{lft,jdbcType=DECIMAL},
+      </if>
+      <if test="rgt != null" >
+        RGT = #{rgt,jdbcType=DECIMAL},
+      </if>
+      <if test="sortValue != null" >
+        SORT_VALUE = #{sortValue,jdbcType=DECIMAL},
+      </if>
+      <if test="showIcon != null" >
+        SHOW_ICON = #{showIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        CREATOR = #{creator,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        MODIFIER = #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifiedTime != null" >
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="display != null" >
+        DISPLAY = #{display,jdbcType=DECIMAL},
+      </if>
+      <if test="resources != null" >
+        RESOURCES = #{resources,jdbcType=OTHER},
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL = #{menuLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="menuLevel1 != null" >
+        MENU_LEVEL_1 = #{menuLevel1,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.alvin.menu.model.Menu" >
+    update HO_MENU
+    set NAME = #{name,jdbcType=VARCHAR},
+      LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      PID = #{pid,jdbcType=DECIMAL},
+      LFT = #{lft,jdbcType=DECIMAL},
+      RGT = #{rgt,jdbcType=DECIMAL},
+      SORT_VALUE = #{sortValue,jdbcType=DECIMAL},
+      SHOW_ICON = #{showIcon,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFIER = #{modifier,jdbcType=DECIMAL},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      CODE = #{code,jdbcType=VARCHAR},
+      DISPLAY = #{display,jdbcType=DECIMAL},
+      RESOURCES = #{resources,jdbcType=OTHER},
+      MENU_LEVEL = #{menuLevel,jdbcType=DECIMAL},
+      MENU_LEVEL_1 = #{menuLevel1,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+</mapper>
